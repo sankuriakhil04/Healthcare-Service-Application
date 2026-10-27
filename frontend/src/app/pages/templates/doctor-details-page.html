@@ -1,0 +1,25 @@
+<section class="section detail-page">
+  <a class="text-link" routerLink="/doctors">← Back to doctors</a>
+  <p *ngIf="loading" class="state">Loading doctor...</p>
+  <p *ngIf="error" class="state error">{{ error }}</p>
+  <div *ngIf="doctor" class="detail-grid">
+    <img class="detail-photo" [src]="doctor.image" [alt]="doctor.name" />
+    <div>
+      <span class="eyebrow"
+        >{{ doctor.specialization }} · {{ doctor.experience }} YEARS EXPERIENCE</span
+      >
+      <h1>{{ doctor.name }}</h1>
+      <p class="lead">{{ doctor.about }}</p>
+      <div class="detail-facts">
+        <p><b>Qualifications</b>{{ doctor.qualification }}</p>
+        <p><b>Clinic</b>{{ doctor.clinic }}</p>
+        <p><b>Consultation</b>₹{{ doctor.fee }}</p>
+        <p><b>Available days</b>{{ doctor.days.join(', ') }}</p>
+        <p><b>Available times</b>{{ doctor.times.join(' · ') }}</p>
+      </div>
+      <a class="btn" [routerLink]="['/appointments']" [queryParams]="{ doctor: doctor.id }"
+        >Book an appointment <span>↗</span></a
+      >
+    </div>
+  </div>
+</section>

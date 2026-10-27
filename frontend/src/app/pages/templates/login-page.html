@@ -1,0 +1,29 @@
+<section class="auth-layout">
+  <div class="auth-art">
+    <span class="eyebrow">A GOOD PLACE TO BEGIN</span>
+    <h2>Care is a<br /><em>conversation.</em></h2>
+    <p>Log in to keep your health journey moving.</p>
+    <span class="auth-quote">“The best care begins with feeling heard.”</span>
+  </div>
+  <form class="auth-card" [formGroup]="form" (ngSubmit)="submit()">
+    <span class="eyebrow">WELCOME BACK</span>
+    <h1>Good to see you.</h1>
+    <p>Log in to your CareConnect account.</p>
+    <div *ngIf="error" class="alert danger">{{ error }}</div>
+    <label
+      >Email address<input type="email" formControlName="email" autocomplete="email" /><small
+        *ngIf="invalid('email')"
+        >Enter a valid email address.</small
+      ></label
+    ><label
+      >Password<input
+        type="password"
+        formControlName="password"
+        autocomplete="current-password"
+      /><small *ngIf="invalid('password')">Please enter your password.</small></label
+    ><button class="btn auth-submit" [disabled]="loading">
+      {{ loading ? 'Signing in...' : 'Log in' }} <span>↗</span>
+    </button>
+    <p class="auth-switch">New to CareConnect? <a routerLink="/register">Create an account</a></p>
+  </form>
+</section>

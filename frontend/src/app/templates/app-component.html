@@ -1,0 +1,62 @@
+<header class="topbar">
+  <div class="nav-shell">
+    <a class="brand" routerLink="/home"
+      ><span class="brand-mark">✚</span
+      ><span
+        >care<span class="brand-accent">connect</span
+        ><small>YOUR HEALTH, IN GOOD HANDS</small></span
+      ></a
+    ><button class="menu-toggle" (click)="menuOpen = !menuOpen" aria-label="Toggle navigation">
+      ☰
+    </button>
+    <nav [class.open]="menuOpen">
+      <a routerLink="/home" routerLinkActive="active">Home</a
+      ><a routerLink="/about" routerLinkActive="active">About</a
+      ><a routerLink="/doctors" routerLinkActive="active">Doctors</a
+      ><a routerLink="/services" routerLinkActive="active">Services</a
+      ><a routerLink="/appointments" routerLinkActive="active">Appointments</a
+      ><a routerLink="/medical-records" routerLinkActive="active">Records</a
+      ><a routerLink="/profile" routerLinkActive="active">Profile</a
+      ><a routerLink="/contact" routerLinkActive="active">Contact</a
+      ><ng-container *ngIf="!auth.isAuthenticated(); else signedIn"
+        ><a class="nav-login" routerLink="/login">Log in</a
+        ><a class="btn btn-small" routerLink="/register"
+          >Get started <span>↗</span></a
+        ></ng-container
+      ><ng-template #signedIn
+        ><a routerLink="/dashboard">Dashboard</a
+        ><button class="nav-logout" (click)="logout()">Log out</button></ng-template
+      >
+    </nav>
+  </div>
+</header>
+<main><router-outlet /></main>
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a class="brand footer-brand" routerLink="/home"
+        ><span class="brand-mark">✚</span
+        ><span
+          >care<span class="brand-accent">connect</span
+          ><small>YOUR HEALTH, IN GOOD HANDS</small></span
+        ></a
+      >
+      <p>
+        Thoughtful care starts with a connection.<br />Here for your health, every step of the way.
+      </p>
+    </div>
+    <div class="footer-links">
+      <strong>Explore</strong><a routerLink="/doctors">Find a doctor</a
+      ><a routerLink="/services">Our services</a><a routerLink="/about">About us</a>
+    </div>
+    <div class="footer-links">
+      <strong>Patient care</strong><a routerLink="/appointments">Book a visit</a
+      ><a routerLink="/my-appointments">My appointments</a><a routerLink="/contact">Get in touch</a>
+    </div>
+    <div class="footer-note">
+      <span class="eyebrow">HERE WHEN YOU NEED US</span>
+      <p>Care that feels<br />closer to home.</p>
+      <span class="fineprint">© 2026 CareConnect Health. All rights reserved.</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,59 @@
+<section class="auth-layout">
+  <div class="auth-art">
+    <span class="eyebrow">YOUR HEALTH, IN GOOD HANDS</span>
+    <h2>Make room<br />for <em>feeling well.</em></h2>
+    <p>Create an account and make your next step a little easier.</p>
+    <span class="auth-quote">Thoughtful care, closer to home.</span>
+  </div>
+  <form class="auth-card" [formGroup]="form" (ngSubmit)="submit()">
+    <span class="eyebrow">LET’S GET STARTED</span>
+    <h1>Join CareConnect.</h1>
+    <p>A few details, and you’re all set.</p>
+    <div *ngIf="error" class="alert danger">{{ error }}</div>
+    <div class="form-grid auth-grid">
+      <label
+        >Full name<input formControlName="name" autocomplete="name" /><small *ngIf="invalid('name')"
+          >Please enter your name.</small
+        ></label
+      ><label
+        >Email address<input type="email" formControlName="email" autocomplete="email" /><small
+          *ngIf="invalid('email')"
+          >Enter a valid email.</small
+        ></label
+      ><label
+        >Phone<input formControlName="phone" autocomplete="tel" /><small *ngIf="invalid('phone')"
+          >Enter a valid phone.</small
+        ></label
+      ><label
+        >Date of birth<input type="date" formControlName="dateOfBirth" /><small
+          *ngIf="invalid('dateOfBirth')"
+          >Please add your date of birth.</small
+        ></label
+      ><label
+        >Gender<select formControlName="gender">
+          <option value="">Choose</option>
+          <option>Female</option>
+          <option>Male</option>
+          <option>Non-binary</option>
+          <option>Prefer not to say</option></select
+        ><small *ngIf="invalid('gender')">Please choose an option.</small></label
+      ><label
+        >Password<input
+          type="password"
+          formControlName="password"
+          autocomplete="new-password"
+        /><small *ngIf="invalid('password')">Use at least 8 characters.</small></label
+      ><label class="full"
+        >Confirm password<input
+          type="password"
+          formControlName="confirmPassword"
+          autocomplete="new-password"
+        /><small *ngIf="invalid('confirmPassword')">Passwords must match.</small></label
+      >
+    </div>
+    <button class="btn auth-submit" [disabled]="loading">
+      {{ loading ? 'Creating account...' : 'Create my account' }} <span>↗</span>
+    </button>
+    <p class="auth-switch">Already have an account? <a routerLink="/login">Log in</a></p>
+  </form>
+</section>

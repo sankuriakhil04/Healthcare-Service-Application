@@ -1,0 +1,58 @@
+<section class="page-hero compact">
+  <span class="eyebrow">PEOPLE WHO PUT YOU FIRST</span>
+  <h1>Care starts<br />with <em>the right person.</em></h1>
+  <p>Meet our doctors and find someone who feels like the right fit.</p>
+</section>
+<section class="section">
+  <div class="filter-row">
+    <input
+      class="search-input"
+      [(ngModel)]="searchText"
+      placeholder="Search by doctor name"
+      aria-label="Search doctors"
+    /><select [(ngModel)]="specialty" aria-label="Filter by specialization">
+      <option value="">All specialities</option>
+      <option *ngFor="let s of specialties" [value]="s">{{ s }}</option></select
+    ><select [(ngModel)]="availability" aria-label="Filter by availability">
+      <option value="all">Any availability</option>
+      <option value="available">Available</option>
+      <option value="unavailable">Not available today</option></select
+    ><span class="result-count">{{ filtered.length }} care professionals</span>
+  </div>
+  <p *ngIf="loading" class="state">Loading doctors...</p>
+  <p *ngIf="error" class="state error">{{ error }}</p>
+  <div *ngIf="!loading && !error && filtered.length" class="doctor-grid">
+    <article class="doctor-card" *ngFor="let doctor of filtered">
+      <a [routerLink]="['/doctors', doctor.id]" class="doctor-photo"
+        ><img [src]="doctor.image" [alt]="doctor.name" /><span
+          class="availability"
+          [class.offline]="!doctor.available"
+          >{{ doctor.available ? 'Taking appointments' : 'Limited availability' }}</span
+        ></a
+      >
+      <div class="doctor-body">
+        <span class="eyebrow">{{ doctor.specialization }}</span>
+        <h3>{{ doctor.name }}</h3>
+        <p>{{ doctor.qualification }}</p>
+        <div class="doctor-meta">
+          <span>{{ doctor.experience }} years experience</span
+          ><span>₹{{ doctor.fee }} / visit</span>
+        </div>
+        <div class="doctor-actions">
+          <a class="text-link" [routerLink]="['/doctors', doctor.id]"
+            >Meet {{ doctor.name.split(' ')[1] }} <span>↗</span></a
+          ><a
+            class="icon-button"
+            [routerLink]="['/appointments']"
+            [queryParams]="{ doctor: doctor.id }"
+            aria-label="Book appointment"
+            >↗</a
+          >
+        </div>
+      </div>
+    </article>
+  </div>
+  <p *ngIf="!loading && !error && !filtered.length" class="state">
+    No doctors match those filters. Try another search.
+  </p>
+</section>

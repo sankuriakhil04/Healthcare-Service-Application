@@ -1,0 +1,36 @@
+<section class="page-hero compact">
+  <span class="eyebrow">WE’RE HERE TO HELP</span>
+  <h1>Let’s start<br />a <em>conversation.</em></h1>
+  <p>Questions, feedback or just need a hand finding the right care? We’re listening.</p>
+</section>
+<section class="section contact-layout">
+  <div class="contact-aside">
+    <span class="eyebrow">A REAL PERSON, RIGHT HERE</span>
+    <h2>We’d love<br />to <em>hear from you.</em></h2>
+    <p>Send us a note and our care team will be in touch.</p>
+    <div class="contact-detail">
+      <span>01</span>
+      <div><b>Need a doctor?</b><a routerLink="/doctors">Meet our care team ↗</a></div>
+    </div>
+    <div class="contact-detail">
+      <span>02</span>
+      <div><b>Already a patient?</b><a routerLink="/login">Visit your dashboard ↗</a></div>
+    </div>
+  </div>
+  <form class="form-card" [formGroup]="form" (ngSubmit)="submit()">
+    <span class="eyebrow">SEND US A NOTE</span>
+    <div *ngIf="success" class="alert success">{{ success }}</div>
+    <div *ngIf="error" class="alert danger">{{ error }}</div>
+    <div class="form-grid">
+      <label>Your name<input formControlName="name" /></label
+      ><label>Email address<input formControlName="email" type="email" /></label
+      ><label class="full">Subject<input formControlName="subject" /></label
+      ><label class="full"
+        >Your message<textarea rows="5" formControlName="message"></textarea>
+      </label>
+    </div>
+    <button class="btn" [disabled]="loading">
+      {{ loading ? 'Sending...' : 'Send your message' }} <span>↗</span>
+    </button>
+  </form>
+</section>

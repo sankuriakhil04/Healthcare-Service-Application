@@ -1,0 +1,19 @@
+<section class="page-hero compact">
+  <span class="eyebrow">CARE FOR EVERY CHAPTER</span>
+  <h1>Support for your<br /><em>whole wellbeing.</em></h1>
+  <p>From everyday checkups to specialist expertise, find care that meets you where you are.</p>
+</section>
+<section class="section">
+  <p *ngIf="loading" class="state">Loading services...</p>
+  <p *ngIf="error" class="state error">{{ error }}</p>
+  <div *ngIf="!loading && !error" class="services-grid">
+    <article *ngFor="let s of services" class="service-card">
+      <span class="service-icon">{{ s.icon }}</span
+      ><span class="eyebrow">CARE {{ s.available ? 'AVAILABLE' : 'COMING SOON' }}</span>
+      <h3>{{ s.name }}</h3>
+      <p>{{ s.description }}</p>
+      <a class="text-link" routerLink="/appointments">Explore care <span>↗</span></a>
+    </article>
+  </div>
+  <p *ngIf="!loading && !error && !services.length" class="state">No records found.</p>
+</section>

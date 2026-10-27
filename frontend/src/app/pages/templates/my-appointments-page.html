@@ -1,0 +1,52 @@
+<section class="page-hero compact">
+  <span class="eyebrow">YOUR CARE, AT A GLANCE</span>
+  <h1>Appointments,<br /><em>all together.</em></h1>
+  <p>Keep track of what’s coming up and what’s already been taken care of.</p>
+</section>
+<section class="section">
+  <p *ngIf="loading" class="state">Loading appointments...</p>
+  <p *ngIf="error" class="state error">{{ error }}</p>
+  <div *ngIf="!loading && !error && appointments.length" class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Doctor</th>
+          <th>Speciality</th>
+          <th>Date & time</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of appointments">
+          <td>
+            <b>{{ a.doctor }}</b
+            ><small>{{ a.patientName }}</small>
+          </td>
+          <td>{{ a.specialization }}</td>
+          <td>
+            {{ a.date }}<small>{{ a.time }}</small>
+          </td>
+          <td>{{ a.reason }}</td>
+          <td>
+            <span class="status-chip" [class.cancelled]="a.status === 'Cancelled'">{{
+              a.status
+            }}</span>
+          </td>
+          <td>
+            <button *ngIf="a.status !== 'Cancelled'" class="text-button" (click)="cancel(a)">
+              Cancel
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!loading && !error && !appointments.length" class="empty-state">
+    <span>✳</span>
+    <h3>No appointments yet.</h3>
+    <p>Your next step toward feeling better can start right here.</p>
+    <a class="btn" routerLink="/appointments">Book a visit <span>↗</span></a>
+  </div>
+</section>

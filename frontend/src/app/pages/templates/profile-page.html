@@ -1,0 +1,35 @@
+<section class="page-hero compact">
+  <span class="eyebrow">A LITTLE MORE ABOUT YOU</span>
+  <h1>Your care,<br /><em>your way.</em></h1>
+  <p>Keep your details current so your care team can look after you better.</p>
+</section>
+<section class="section form-section">
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-card">
+    <div class="form-title">
+      <span class="eyebrow">PATIENT PROFILE</span>
+      <h2>Let’s keep things <em>up to date.</em></h2>
+    </div>
+    <p *ngIf="error" class="alert danger">{{ error }}</p>
+    <p *ngIf="success" class="alert success">{{ success }}</p>
+    <div class="form-grid">
+      <label>Full name<input formControlName="name" /></label
+      ><label>Email address<input formControlName="email" readonly /></label
+      ><label>Phone number<input formControlName="phone" /></label
+      ><label>Date of birth<input type="date" formControlName="dateOfBirth" /></label
+      ><label
+        >Gender<select formControlName="gender">
+          <option value="">Choose</option>
+          <option>Female</option>
+          <option>Male</option>
+          <option>Non-binary</option>
+          <option>Prefer not to say</option>
+        </select></label
+      ><label>Blood group<input formControlName="bloodGroup" placeholder="e.g. O+" /></label
+      ><label class="full">Address<textarea formControlName="address" rows="2"></textarea></label
+      ><label class="full">Emergency contact<input formControlName="emergencyContact" /></label>
+    </div>
+    <button class="btn" [disabled]="saving">
+      {{ saving ? 'Saving...' : 'Save changes' }} <span>↗</span>
+    </button>
+  </form>
+</section>

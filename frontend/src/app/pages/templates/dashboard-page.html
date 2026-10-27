@@ -1,0 +1,57 @@
+<section class="page-hero compact">
+  <span class="eyebrow">A CLEARER VIEW OF YOUR CARE</span>
+  <h1>
+    Welcome back,<br /><em>{{ data?.welcome || 'friend' }}.</em>
+  </h1>
+  <p>A little snapshot of your health journey, all in one place.</p>
+</section>
+<section class="section">
+  <p *ngIf="loading" class="state">Loading your dashboard...</p>
+  <p *ngIf="error" class="state error">{{ error }}</p>
+  <ng-container *ngIf="data"
+    ><div class="dashboard-stats">
+      <article>
+        <span class="eyebrow">APPOINTMENTS</span><strong>{{ data.totalAppointments }}</strong
+        ><small>All time</small>
+      </article>
+      <article>
+        <span class="eyebrow">UPCOMING VISITS</span
+        ><strong>{{ data.upcomingAppointments.length }}</strong
+        ><small>On your calendar</small>
+      </article>
+      <article>
+        <span class="eyebrow">CARE TEAM</span><strong>{{ data.availableDoctors }}</strong
+        ><small>Doctors available</small>
+      </article>
+      <article>
+        <span class="eyebrow">HEALTH RECORDS</span><strong>{{ data.medicalRecords }}</strong
+        ><small>Care notes</small>
+      </article>
+    </div>
+    <div class="dashboard-lower">
+      <div class="dashboard-panel">
+        <span class="eyebrow">COMING UP</span>
+        <h3>Your next visits</h3>
+        <article *ngFor="let a of data.upcomingAppointments" class="upcoming-row">
+          <span class="upcoming-date">{{ a.date }}</span
+          ><span
+            ><b>{{ a.doctor }}</b
+            ><small>{{ a.specialization }} · {{ a.time }}</small></span
+          ><span class="status-chip">{{ a.status }}</span>
+        </article>
+        <p *ngIf="!data.upcomingAppointments.length" class="muted">
+          Nothing on the calendar just yet.
+        </p>
+        <a class="text-link" routerLink="/my-appointments">All appointments ↗</a>
+      </div>
+      <div class="dashboard-panel quick-actions">
+        <span class="eyebrow">A GOOD NEXT STEP</span>
+        <h3>Quick links</h3>
+        <a routerLink="/appointments">Book a visit <span>↗</span></a
+        ><a routerLink="/doctors">Meet the doctors <span>↗</span></a
+        ><a routerLink="/medical-records">Your medical records <span>↗</span></a
+        ><a routerLink="/profile">Update your profile <span>↗</span></a>
+      </div>
+    </div></ng-container
+  >
+</section>

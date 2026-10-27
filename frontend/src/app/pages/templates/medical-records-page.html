@@ -1,0 +1,23 @@
+<section class="page-hero compact">
+  <span class="eyebrow">YOUR HEALTH STORY</span>
+  <h1>A record of<br /><em>your care.</em></h1>
+  <p>Keep the important details of your health journey close at hand.</p>
+</section>
+<section class="section">
+  <p *ngIf="loading" class="state">Loading medical records...</p>
+  <p *ngIf="error" class="state error">{{ error }}</p>
+  <div *ngIf="!loading && !error && records.length" class="record-grid">
+    <article class="record-card" *ngFor="let r of records">
+      <span class="eyebrow">{{ r.date }} · {{ r.id }}</span>
+      <h3>{{ r.diagnosis }}</h3>
+      <p>With {{ r.doctor }}</p>
+      <div class="record-note">
+        <b>Prescription</b><span>{{ r.prescription }}</span>
+      </div>
+      <div class="record-note">
+        <b>Notes</b><span>{{ r.notes }}</span>
+      </div>
+    </article>
+  </div>
+  <p *ngIf="!loading && !error && !records.length" class="state">No records found.</p>
+</section>

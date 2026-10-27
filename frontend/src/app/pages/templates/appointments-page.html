@@ -1,0 +1,65 @@
+<section class="page-hero compact">
+  <span class="eyebrow">MAKE TIME FOR YOUR HEALTH</span>
+  <h1>A visit that<br />fits <em>your life.</em></h1>
+  <p>Choose a doctor and a time. We’ll take it from there.</p>
+</section>
+<section class="section form-section">
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+    <div class="form-title">
+      <span class="eyebrow">YOUR APPOINTMENT</span>
+      <h2>Let’s get you <em>connected.</em></h2>
+    </div>
+    <div *ngIf="success" class="alert success">
+      Appointment booked successfully!<br /><span>{{ success }}</span>
+    </div>
+    <div *ngIf="error" class="alert danger">{{ error }}</div>
+    <div class="form-grid">
+      <label
+        >Patient name<input formControlName="patientName" autocomplete="name" /><small
+          *ngIf="invalid('patientName')"
+          >Please enter your name.</small
+        ></label
+      ><label
+        >Email address<input type="email" formControlName="email" autocomplete="email" /><small
+          *ngIf="invalid('email')"
+          >Enter a valid email address.</small
+        ></label
+      ><label
+        >Phone number<input formControlName="phone" inputmode="tel" autocomplete="tel" /><small
+          *ngIf="invalid('phone')"
+          >Enter a valid phone number.</small
+        ></label
+      ><label
+        >Doctor<select formControlName="doctorId">
+          <option value="">Choose a doctor</option>
+          <option *ngFor="let d of doctors" [value]="d.id">
+            {{ d.name }} · {{ d.specialization }}
+          </option></select
+        ><small *ngIf="invalid('doctorId')">Please choose a doctor.</small></label
+      ><label
+        >Appointment date<input type="date" [min]="today" formControlName="date" /><small
+          *ngIf="invalid('date')"
+          >Choose a valid date.</small
+        ></label
+      ><label
+        >Appointment time<select formControlName="time">
+          <option value="">Choose a time</option>
+          <option *ngFor="let t of selectedTimes" [value]="t">{{ t }}</option>
+          <option *ngIf="!form.value.doctorId" value="09:00">09:00</option></select
+        ><small *ngIf="invalid('time')">Please choose a time.</small></label
+      ><label class="full"
+        >Reason for visit<textarea
+          formControlName="reason"
+          rows="4"
+          placeholder="Tell us a little about what brings you in..."
+        ></textarea
+        ><small *ngIf="invalid('reason')">Please share a brief reason for your visit.</small></label
+      >
+    </div>
+    <div class="form-actions">
+      <button class="btn" type="submit" [disabled]="saving">
+        {{ saving ? 'Booking...' : 'Confirm appointment' }} <span>↗</span></button
+      ><button class="btn btn-light" type="button" (click)="reset()">Clear form</button>
+    </div>
+  </form>
+</section>
